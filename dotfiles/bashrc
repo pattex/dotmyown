@@ -1,0 +1,53 @@
+[ -f ~/.dotmyown.config ] && . ~/.dotmyown.config
+
+# Set default prompt color
+if [ -z $PROMPT_COLOR ]; then
+  export PROMPT_COLOR=30
+fi
+
+# Don't put duplicate lines in the history. See bash(1) for more options
+export HISTCONTROL=ignoredups
+export HISTSIZE=10000
+
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Enable color support of ls
+if [ "$TERM" != "dumb" ]; then
+  if [[ `uname -s` == "Darwin" ]]; then
+    alias ls='ls -G'
+  else
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+  fi
+fi
+
+# Set a fancy prompt (non-color, unless we know we "want" color)
+if [ "`id -u`" -eq 0 ]; then
+  prompt_indicator="#"
+else
+  prompt_indicator=">"
+fi
+
+case "$TERM" in
+  xterm-256color|xterm-color|xterm|screen)
+    export PS1="\[\033[7;${PROMPT_COLOR/30/37}m\]\t\[\033[0m\] \u@\h\${WINDOW:+#\$WINDOW}:\w${prompt_indicator} "
+    ;;
+  *)
+    export PS1="\u@\h:\w${prompt_indicator} "
+    ;;
+esac
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+  xterm*|rxvt*|screen)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}${WINDOW:+#$WINDOW}: ${PWD}\007"'
+    ;;
+  *)
+    ;;
+esac
+
+# Alias definitions.
+[ -f /etc/bash_aliases ] && . /etc/bash_aliases
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases

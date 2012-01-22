@@ -1,0 +1,5 @@
+alias cl="clear; l"
+alias git=hub
+alias grp="grep -EHn --color -rs --exclude-dir .svn --exclude-dir .git"
+alias l="ls -ahl"
+alias v-="view -"
