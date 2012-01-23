@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'highline/import'
+require 'ftools'
 
 rubygems = %w[hub wirble]
 
@@ -57,25 +58,25 @@ config = Hash.new
 
 say "\nLet's do some configurations!"
 question = "You already have a config file! Do you want to overwrite it?"
-if !File.exists?(config_fiel) || agree(question) { |q| q.default = 'no' }
+if !File.exists?(config_fiel) || agree(question + ' ') { |q| q.default = 'no' }
   config_vars.each { |var|
     question = var.gsub('_', ' ')
     question = question[0,1] + question[1..-1].downcase
-    config[var] = ask(question) { |q| q.default = ENV[var] if ENV[var] }
+    config[var] = ask(question + ' ') { |q| q.default = ENV[var] if ENV[var] }
   }
-  
+
   color = choose { |menu|
     menu.prompt = "Choose the color of your prompt:"
     menu.choices(*colors.keys)
   }
   config['PROMPT_COLOR'] = colors[color]
-  
+
   File.open(config_fiel, 'w') { |f|
     config.each { |k, v|
       f.puts "export #{k}='#{v}'"
     }
   }
-  
+
   if File.exists?(config_fiel)
     say "\nConfig file '#{config_fiel}' have been written. You can edit it "
     say "manually, if you want to."
