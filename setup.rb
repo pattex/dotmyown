@@ -28,28 +28,28 @@ rescue Gem::LoadError
   say "\nSome of the required gems (#{rubygems.join(', ')}) are not installed."
   if agree('Shall we install them right now? ')
     puts `bundle install`
-  else
-    return
   end
 end
 
-# create ~/bin if it doesn't already exists
-unless File.exists?("#{ENV['HOME']}/bin")
-  if File.makedirs("#{ENV['HOME']}/bin")
-    say "\nCreated directory '#{ENV['HOME']}/bin'"
+if system('which hub') && !File.exists?("#{ENV['HOME']}/bin/hub")
+  # create ~/bin if it doesn't already exists
+  unless File.exists?("#{ENV['HOME']}/bin")
+    if File.makedirs("#{ENV['HOME']}/bin")
+      say "\nCreated directory '#{ENV['HOME']}/bin'"
+    end
   end
-end
 
-unless File.exists?("#{ENV['HOME']}/bin/hub")
-  `hub hub standalone > #{ENV['HOME']}/bin/hub && chmod 755 #{ENV['HOME']}/bin/hub`
-  if File.exists?("#{ENV['HOME']}/bin/hub")
-    say "\nInstalled a standalone version of hub which doesn't require "
-    say "RubyGems to run."
-  else
-    puts "\nInstallation of hub failed."
-    puts 'Please try it manually after this script is done.'
-    puts 'To do that, run:'
-    puts "\n\thub hub standalone > ~/bin/hub && chmod 755 ~/bin/hub\n"
+  unless File.exists?("#{ENV['HOME']}/bin/hub")
+    `hub hub standalone > #{ENV['HOME']}/bin/hub && chmod 755 #{ENV['HOME']}/bin/hub`
+    if File.exists?("#{ENV['HOME']}/bin/hub")
+      say "\nInstalled a standalone version of hub which doesn't require "
+      say "RubyGems to run."
+    else
+      puts "\nInstallation of hub failed."
+      puts 'Please try it manually after this script is done.'
+      puts 'To do that, run:'
+      puts "\n\thub hub standalone > ~/bin/hub && chmod 755 ~/bin/hub\n"
+    end
   end
 end
 
