@@ -1,4 +1,5 @@
 PATH="$HOME/bin"
+PATH="$PATH:$HOME/.rbenv/bin"
 PATH="$PATH:/usr/local/sbin"
 PATH="$PATH:/usr/local/bin"
 PATH="$PATH:/usr/sbin"
@@ -9,5 +10,7 @@ PATH="$PATH:/var/lib/gems/1.8/bin"
 export PATH
 
 # umask 022
+
+eval "$(rbenv init -)"
 
 source ~/.bashrc
