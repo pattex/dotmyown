@@ -3,4 +3,5 @@ alias git=hub
 alias grp="grep -EHn --color -rs --exclude-dir .svn --exclude-dir .git"
 alias l="ls -hl"
 alias ll="ls -ahl"
+alias r=rails
 alias v-="view -"
