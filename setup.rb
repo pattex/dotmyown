@@ -7,7 +7,7 @@ require 'ftools'
 rubygems = %w[hub wirble]
 
 dotfiles_path = File.join(File.expand_path(File.dirname(__FILE__)), 'dotfiles')
-config_fiel   = File.join(ENV['HOME'], '.dotmyown.config')
+config_file   = File.join(ENV['HOME'], '.dotmyown.config')
 config_vars   = %w[GIT_AUTHOR_NAME EMAIL GITHUB_USER GITHUB_TOKEN]
 colors = {
   :black     => 30,
@@ -58,7 +58,7 @@ config = Hash.new
 
 say "\nLet's do some configurations!"
 question = "You already have a config file! Do you want to overwrite it?"
-if !File.exists?(config_fiel) || agree(question + ' ') { |q| q.default = 'no' }
+if !File.exists?(config_file) || agree(question + ' ') { |q| q.default = 'no' }
   config_vars.each { |var|
     question = var.gsub('_', ' ')
     question = question[0,1] + question[1..-1].downcase
@@ -71,17 +71,17 @@ if !File.exists?(config_fiel) || agree(question + ' ') { |q| q.default = 'no' }
   }
   config['PROMPT_COLOR'] = colors[color]
 
-  File.open(config_fiel, 'w') { |f|
+  File.open(config_file, 'w') { |f|
     config.each { |k, v|
       f.puts "export #{k}='#{v}'"
     }
   }
 
-  if File.exists?(config_fiel)
-    say "\nConfig file '#{config_fiel}' have been written. You can edit it "
+  if File.exists?(config_file)
+    say "\nConfig file '#{config_file}' have been written. You can edit it "
     say "manually, if you want to."
   else
-    say "\nSomething went wrong! The config file '#{config_fiel}' couldn't created."
+    say "\nSomething went wrong! The config file '#{config_file}' couldn't created."
   end
 end
 
