@@ -1,8 +1,0 @@
-alias cl="clear; l"
-alias git=hub
-alias grpx="grep -EHn --color -rs"
-alias grp="grpx --exclude-dir .svn --exclude-dir .git"
-alias l="ls -hl"
-alias ll="ls -ahl"
-alias r=rails
-alias v-="view -"

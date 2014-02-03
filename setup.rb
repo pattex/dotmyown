@@ -9,18 +9,6 @@ rubygems = %w[hub wirble]
 dotfiles_path = File.join(File.expand_path(File.dirname(__FILE__)), 'dotfiles')
 config_file   = File.join(ENV['HOME'], '.dotmyown.config')
 config_vars   = %w[GIT_AUTHOR_NAME EMAIL GITHUB_USER GITHUB_TOKEN]
-colors = {
-  :black     => 30,
-  :dark_red  => 31,
-  :green     => 32,
-  :orange    => 33,
-  :blue      => 34,
-  :magenta   => 35,
-  :turquoise => 36,
-  :gray      => 37,
-  :light_red => 38,
-  :white     => 39
-}
 
 begin
   rubygems.each { |rubygem| gem(rubygem) }
@@ -28,28 +16,6 @@ rescue Gem::LoadError
   say "\nSome of the required gems (#{rubygems.join(', ')}) are not installed."
   if agree('Shall we install them right now? ')
     puts `bundle install`
-  end
-end
-
-if system('which hub') && !File.exists?("#{ENV['HOME']}/bin/hub")
-  # create ~/bin if it doesn't already exists
-  unless File.exists?("#{ENV['HOME']}/bin")
-    if File.makedirs("#{ENV['HOME']}/bin")
-      say "\nCreated directory '#{ENV['HOME']}/bin'"
-    end
-  end
-
-  unless File.exists?("#{ENV['HOME']}/bin/hub")
-    `hub hub standalone > #{ENV['HOME']}/bin/hub && chmod 755 #{ENV['HOME']}/bin/hub`
-    if File.exists?("#{ENV['HOME']}/bin/hub")
-      say "\nInstalled a standalone version of hub which doesn't require "
-      say "RubyGems to run."
-    else
-      puts "\nInstallation of hub failed."
-      puts 'Please try it manually after this script is done.'
-      puts 'To do that, run:'
-      puts "\n\thub hub standalone > ~/bin/hub && chmod 755 ~/bin/hub\n"
-    end
   end
 end
 
@@ -64,12 +30,6 @@ if !File.exists?(config_file) || agree(question + ' ') { |q| q.default = 'no' }
     question = question[0,1] + question[1..-1].downcase
     config[var] = ask(question + ' ') { |q| q.default = ENV[var] if ENV[var] }
   }
-
-  color = choose { |menu|
-    menu.prompt = "Choose the color of your prompt:"
-    menu.choices(*colors.keys)
-  }
-  config['PROMPT_COLOR'] = colors[color]
 
   File.open(config_file, 'w') { |f|
     config.each { |k, v|
