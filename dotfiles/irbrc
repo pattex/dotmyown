@@ -1,20 +1,16 @@
 #!/usr/bin/ruby
 require 'rubygems'
 require 'irb/completion'
+require 'irb/ext/save-history'
 
-unless 'macruby' == RUBY_ENGINE
-  require 'irb/ext/save-history'
-
-  begin
-    # load wirble
-    require 'wirble'
-
-    # start wirble (with color)
-    Wirble.init
-    Wirble.colorize
-  rescue LoadError => err
-    warn "Couldn't load Wirble: #{err}"
-  end
+begin
+  # load wirble
+  require 'wirble'
+  # start wirble (with color)
+  Wirble.init
+  Wirble.colorize
+rescue LoadError => err
+  warn "Couldn't load Wirble: #{err}"
 end
 
 IRB.conf[:SAVE_HISTORY] = 1000
