@@ -1,0 +1,150 @@
+# Diverse zsh options
+########################################################################
+# don't beep on error
+setopt no_beep
+
+# Allow comments even in interactive shells (especially for Muness)
+setopt interactive_comments
+
+# treat #, ~, and ^ as part of patterns for filename generation
+setopt extended_glob
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
+
+# ALIASES
+########################################################################
+
+alias l='ls -l'
+alias lh='ls -l'
+alias ll='ls -la'
+alias llh='ls -lah'
+alias cl="clear; l"
+alias  t='tree -L 2'
+alias t1='tree -L 1'
+alias r='rails'
+alias tmux='TERM=screen-256color-bce tmux'
+alias prom-local-start="VBoxManage startvm prom-local"
+alias prom-local-stop="VBoxManage controlvm prom-local savestate"
+
+# History
+#########
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Allow multiple terminal sessions to all append to one zsh command history
+setopt append_history
+
+# Do not write events to history that are duplicates of previous events
+setopt hist_ignore_dups
+
+# Remove extra blanks from each command line being added to history
+setopt hist_reduce_blanks
+
+# don't execute, just expand history
+setopt hist_verify
+
+# imports new commands and appends typed commands to history
+setopt share_history
+
+# Completion
+############
+
+# When completing from the middle of a word, move the cursor to the end
+# of the word
+setopt always_to_end
+
+# show completion menu on successive tab press. needs unsetop
+# menu_complete to work
+setopt auto_menu
+
+# Allow completion from within a word/phrase
+setopt complete_in_word
+
+# do not autoselect the first completion entry
+unsetopt menu_complete
+
+# rbenv setup (if installed)
+########################################################################
+if which rbenv &> /dev/null; then
+    export PATH="$PATH:$HOME/.rbenv/bin"
+    eval "$(rbenv init -)"
+fi
+
+# Colors
+########################################################################
+autoload colors; colors
+typeset -Ag FG BG
+
+# Main change, you can see directories on a dark background
+export LSCOLORS="exfxcxdxbxegedabagacad"
+export LS_COLORS="di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+export CLICOLOR=1
+
+for color in {000..255}; do
+    FG[$color]="%{[38;5;${color}m%}"
+    BG[$color]="%{[48;5;${color}m%}"
+done
+
+# Show all 256 colors with color number
+function spectrum_ls() {
+  for code in {000..255}; do
+    print -P -- "$code: %F{$code}Test%f"
+  done
+}
+
+# Prompt
+########################################################################
+autoload -U promptinit
+promptinit
+
+# autoload -U add-zsh-hook
+autoload -Uz vcs_info
+
+# Enable parameter expansion, command substitution, and arithmetic
+# expansion in the prompt
+setopt prompt_subst
+
+# only show the rprompt on the current prompt
+setopt transient_rprompt
+
+# # enable VCS systems you use
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*:prompt:*' check-for-changes true
+# Look at http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
+# for mor options
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '*'   # display this when there are unstaged changes
+zstyle ':vcs_info:*' stagedstr '+'  # display this when there are staged changes
+zstyle ':vcs_info:*' actionformats '[%b%|%a%c%u%]'
+zstyle ':vcs_info:*' formats ':%b%c%u'
+
+precmd () { vcs_info }
+
+
+# Determine Ruby version used with rbenv
+# the chpwd_functions line cause this to update only when the directory
+# changes
+function _update_ruby_version() {
+  typeset -g ruby_version=''
+  if which rbenv &> /dev/null; then
+    ruby_version="ruby-$(rbenv version | sed -e "s/ (set.*$//")"
+  fi
+}
+_update_ruby_version
+chpwd_functions+=(_update_ruby_version)
+
+# %{$FG[136]%}${vcs_info_msg_0_}%{$reset_color%}
+
+PROMPT='%{$FG[008]%}[%*]%{$reset_color%} \
+%{$FG[005]%}%n%{$reset_color%}%{$FG[008]%}@%{$reset_color%}%{$FG[006]%}%m%{$reset_color%}\
+%{$FG[008]%}:%{$reset_color%}%{$FG[247]%}%~%{$reset_color%}%{$FG[130]%}${vcs_info_msg_0_}%{$reset_color%}
+%{$FG[008]%}#%{$reset_color%} '
+
+RPROMPT='%{$FG[052]%}${ruby_version}%{$reset_color%}'
+
+########################################################################
+# Load and run compinit
+autoload -U compinit
+compinit -i
