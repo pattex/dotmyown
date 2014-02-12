@@ -9,6 +9,7 @@
 *~?
 .#*
 .DS_Store
+._.DS_Store
 .autotest
 .local
 .rbenv-version
