@@ -1,6 +1,9 @@
+[user]
+  name = Arne Eilermann
+  email = arne@kleinerdrei.net
 [core]
   excludesfile = ~/.gitignore
-  editor       = vim
+  editor       = emacs
 [color]
   ui = true
 [color "branch"]

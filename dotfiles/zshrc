@@ -15,14 +15,15 @@ bindkey -e
 # ALIASES
 ########################################################################
 
-alias l='ls -l'
-alias lh='ls -l'
-alias ll='ls -la'
+alias   e='emacs'
+alias   l='ls -l'
+alias  lh='ls -l'
+alias  ll='ls -la'
 alias llh='ls -lah'
-alias cl="clear; l"
-alias  t='tree -L 2'
-alias t1='tree -L 1'
-alias r='rails'
+alias  cl="clear; l"
+alias   t='tree -L 2'
+alias  t1='tree -L 1'
+alias   r='rails'
 alias tmux='TERM=screen-256color-bce tmux'
 alias prom-local-start="VBoxManage startvm prom-local"
 alias prom-local-stop="VBoxManage controlvm prom-local savestate"
@@ -71,6 +72,23 @@ if which rbenv &> /dev/null; then
     export PATH="$PATH:$HOME/.rbenv/bin"
     eval "$(rbenv init -)"
 fi
+
+# Key bindings
+########################################################################
+# make search up and down work, so partially type and hit up/down to
+# find relevant stuff
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+
+# Cycle backward through the completion menu
+bindkey '^[[Z' reverse-menu-complete
+
+# Make the delete key (or Fn + Delete on the Mac) work instead of
+# outputting a ~
+bindkey '^?' backward-delete-char
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
+bindkey "\e[3~" delete-char
 
 # Colors
 ########################################################################
