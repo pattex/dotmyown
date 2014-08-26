@@ -165,6 +165,14 @@ PROMPT='%{$FG[008]%}[%*]%{$reset_color%} \
 RPROMPT='%{$FG[052]%}${ruby_version}%{$reset_color%}'
 
 ########################################################################
+# Set terminal window name
+case $TERM in
+  xterm*)
+    precmd () {print -Pn "\e]0;%n@%m\a"}
+    ;;
+esac
+
+########################################################################
 # Load and run compinit
 autoload -U compinit
 compinit -i
