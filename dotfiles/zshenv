@@ -1,0 +1,19 @@
+# PATH
+########################################################################
+
+PATH="$PATH/usr/local/sbin"
+PATH="$PATH:/usr/local/bin"
+PATH="$PATH:/usr/sbin"
+PATH="$PATH:/usr/bin"
+PATH="$PATH:/sbin"
+PATH="$PATH:/bin"
+PATH="$PATH:/var/lib/gems/1.8/bin"
+PATH="$PATH:/usr/texbin"
+PATH="$PATH:$HOME/bin"
+PATH="$PATH:$HOME/.rbenv/bin"
+export PATH
+
+# umask 022
+
+export EDITOR=/usr/bin/emacs
+export LC_TIME="de_DE.UTF-8"

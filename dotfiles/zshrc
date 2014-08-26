@@ -16,17 +16,20 @@ bindkey -e
 ########################################################################
 
 alias   e='emacs'
-alias   l='ls -l'
-alias  lh='ls -l'
-alias  ll='ls -la'
-alias llh='ls -lah'
+alias   l='ls -lh --color=auto'
+alias  ll='ls -lha --color=auto'
 alias  cl="clear; l"
 alias   t='tree -L 2'
 alias  t1='tree -L 1'
 alias   r='rails'
 alias tmux='TERM=screen-256color-bce tmux'
-alias prom-local-start="VBoxManage startvm prom-local"
-alias prom-local-stop="VBoxManage controlvm prom-local savestate"
+
+if [[ $HOST = 'kruemel' ]]; then
+  alias prom-local-start="VBoxManage startvm prom-local"
+  alias prom-local-stop="VBoxManage controlvm prom-local savestate"
+  alias xrandr-work="xrandr --output DP1 --auto --above eDP1"
+  alias xrandr-work-off="xrandr --output DP1 --off"
+fi
 
 # History
 #########
@@ -69,7 +72,6 @@ unsetopt menu_complete
 # rbenv setup (if installed)
 ########################################################################
 if which rbenv &> /dev/null; then
-    export PATH="$PATH:$HOME/.rbenv/bin"
     eval "$(rbenv init -)"
 fi
 
