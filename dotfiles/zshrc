@@ -176,3 +176,13 @@ esac
 # Load and run compinit
 autoload -U compinit
 compinit -i
+
+########################################################################
+# Cookies!!1!
+if which fortune &> /dev/null; then
+  if [[ -f /usr/share/games/fortunes/buffy.dat ]]; then
+    fortune buffy
+  else
+    fortune -a -n 256
+  fi
+fi
