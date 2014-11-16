@@ -35,6 +35,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+(setq tramp-default-method "ssh")
+
 (set-face-attribute 'default nil :height 93)
 (global-hl-line-mode t)
 (global-linum-mode t)
