@@ -35,6 +35,30 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Spelling
+(require 'rw-language-and-country-codes)
+(require 'rw-ispell)
+(require 'rw-hunspell)
+(setq ispell-program-name "hunspell"
+      ispell-dictionary "de_DE") ; Default dictionary to use
+
+(dolist (hook '(text-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode -1))))
+
+;; Emacs for mail editing
+;;(server-start)
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+(defun my-mail-mode-hook ()
+     (auto-fill-mode 1)
+     (abbrev-mode 1)
+     (flyspell-mode 1)
+     ;;(local-set-key "\C-Xk" 'server-edit)
+     )
+(add-hook 'mail-mode-hook 'my-mail-mode-hook)
+
+
 (setq tramp-default-method "ssh")
 
 (set-face-attribute 'default nil :height 93)
