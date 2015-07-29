@@ -18,6 +18,9 @@
 (blink-cursor-mode 0)
 (scroll-bar-mode -1)
 
+;; Auto refresh buffers
+(global-auto-revert-mode t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -58,6 +61,22 @@
      )
 (add-hook 'mail-mode-hook 'my-mail-mode-hook)
 
+(add-to-list 'auto-mode-alist '(".md" . markdown-mode))
+(add-to-list 'auto-mode-alist '(".markdown" . markdown-mode))
+
+;; Add rhtml-mode
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/rhtml-minor-mode"))
+(require 'rhtml-mode)
+(add-to-list 'auto-mode-alist '(".rhtml" . rhtml-mode))
+
+;; Add coffee-mode
+(require 'coffee-mode)
+(custom-set-variables '(coffee-tab-width 2))
+(add-to-list 'auto-mode-alist '(".coffee" . coffee-mode))
+
+;; Add haml-mode
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '(".haml" . haml-mode))
 
 (setq tramp-default-method "ssh")
 
@@ -68,6 +87,10 @@
 (load-theme 'smyck-insp t)
 
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+(custom-set-variables '(javascript-tab-width 2))
+
 (setq-default show-trailing-whitespace t)
 (setq scroll-conservatively 1000)
 (setq scroll-margin 5)

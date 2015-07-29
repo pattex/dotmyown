@@ -9,24 +9,39 @@ setopt interactive_comments
 # treat #, ~, and ^ as part of patterns for filename generation
 setopt extended_glob
 
+# for file in *.pdf; lp ${file}
+setopt short_loops
+
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+
+# Load functions
+autoload -Uz zmv
 
 # ALIASES
 ########################################################################
 
 alias e='emacs'
-alias l='ls -lh --color=auto'
-alias ll='ls -lha --color=auto'
+alias vi='vim'
+alias bc='bc -l'
 alias cl="clear; l"
 alias t='tree -L 2'
 alias t1='tree -L 1'
 alias r='rails'
-alias tmux='TERM=screen-256color-bce tmux'
-alias pss="pass show -c"
-alias psg="pwgen -cns 32"
+alias tmux='TERM=screen-256color tmux'
+
+if [ $(uname) = "FreeBSD" ]; then
+  alias l='ls -lhG'
+  alias ll='ls -lhaG'
+else
+  alias l='ls -lh --color=auto'
+  alias ll='ls -lha --color=auto'
+fi
 
 if [[ $HOST = 'kruemel' ]]; then
+  alias pss="pass show -c"
+  alias psg="pwgen -cns 32"
+
   alias prom-local-start="VBoxManage startvm prom-local"
   alias prom-local-stop="VBoxManage controlvm prom-local savestate"
   alias xrandr-work="xrandr --output DP1 --auto --above eDP1"

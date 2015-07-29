@@ -3,6 +3,15 @@
 
 PATH="$PATH/usr/local/sbin"
 PATH="$PATH:/usr/local/bin"
+
+if [[ $HOST = 'kruemel' ]]; then
+  PATH="$PATH:/opt/android-sdk-linux/tools"
+  PATH="$PATH:/opt/android-sdk-linux/platform-tools"
+  PATH="$PATH:/opt/jdk1.7.0_71/bin"
+
+  export ANDROID_HOME=/opt/android-sdk-linux
+fi
+
 PATH="$PATH:/usr/sbin"
 PATH="$PATH:/usr/bin"
 PATH="$PATH:/sbin"
@@ -16,5 +25,7 @@ export PATH
 
 # umask 022
 
-export EDITOR=/usr/bin/emacs
-export LC_TIME="de_DE.UTF-8"
+if [ $(uname) = "Linux" ]; then
+  export EDITOR=/usr/bin/emacs
+  export LC_TIME="de_DE.UTF-8"
+fi
