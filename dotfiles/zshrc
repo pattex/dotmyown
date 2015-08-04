@@ -33,9 +33,11 @@ alias tmux='TERM=screen-256color tmux'
 if [ $(uname) = "FreeBSD" ]; then
   alias l='ls -lhG'
   alias ll='ls -lhaG'
+  BUFFY_FORTUNE=/usr/share/games/fortune/buffy.dat
 else
   alias l='ls -lh --color=auto'
   alias ll='ls -lha --color=auto'
+  BUFFY_FORTUNE=/usr/share/games/fortunes/buffy.dat
 fi
 
 if [[ $HOST = 'kruemel' ]]; then
@@ -197,7 +199,7 @@ compinit -i
 ########################################################################
 # Cookies!!1!
 if which fortune &> /dev/null; then
-  if [[ -f /usr/share/games/fortunes/buffy.dat ]]; then
+  if [[ -f $BUFFY_FORTUNE ]]; then
     fortune buffy
   else
     fortune -a -n 256
