@@ -88,6 +88,8 @@ setopt complete_in_word
 # do not autoselect the first completion entry
 unsetopt menu_complete
 
+zstyle ':completion:*:*:*:*:*' menu select
+
 # rbenv setup (if installed)
 ########################################################################
 if which rbenv &> /dev/null; then
