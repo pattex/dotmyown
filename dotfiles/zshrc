@@ -159,9 +159,6 @@ zstyle ':vcs_info:*' stagedstr '+'  # display this when there are staged changes
 zstyle ':vcs_info:*' actionformats '[%b%|%a%c%u%]'
 zstyle ':vcs_info:*' formats ':%b%c%u'
 
-precmd () { vcs_info }
-
-
 # Determine Ruby version used with rbenv
 # the chpwd_functions line cause this to update only when the directory
 # changes
@@ -186,7 +183,18 @@ RPROMPT='%{$FG[052]%}${ruby_version}%{$reset_color%}'
 # Set terminal window name
 case $TERM in
   xterm*)
-    precmd () {print -Pn "\e]0;%n@%m\a"}
+    precmd () {
+      print -Pn "\e]0;%n@%m\a"
+
+      # Show git repo info!
+      vcs_info
+    }
+    ;;
+  *)
+    precmd () {
+      # Show git repo info!
+      vcs_info
+    }
     ;;
 esac
 
