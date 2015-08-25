@@ -25,8 +25,6 @@ alias e='emacs'
 alias vi='vim'
 alias bc='bc -l'
 alias cl="clear; l"
-alias t='tree -L 2'
-alias t1='tree -L 1'
 alias r='rails'
 alias tmux='TERM=screen-256color tmux'
 
@@ -41,6 +39,8 @@ else
 fi
 
 if [[ $HOST = 'kruemel' ]]; then
+  alias t="trash"
+
   alias pss="pass show -c"
   alias psg="pwgen -cns 32"
 
