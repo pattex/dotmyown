@@ -29,3 +29,5 @@ if [ $(uname) = "Linux" ]; then
   export EDITOR=/usr/bin/emacs
   export LC_TIME="de_DE.UTF-8"
 fi
+
+export PAGER=less
