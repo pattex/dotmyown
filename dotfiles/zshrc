@@ -38,17 +38,15 @@ else
   BUFFY_FORTUNE=/usr/share/games/fortunes/buffy.dat
 fi
 
-if [[ $HOST = 'kruemel' ]]; then
-  alias t="trash"
+alias t="trash"
 
-  alias pss="pass show -c"
-  alias psg="pwgen -cns 32"
+alias pss="pass show -c"
+alias psg="pwgen -cns 32"
 
-  alias prom-local-start="VBoxManage startvm prom-local"
-  alias prom-local-stop="VBoxManage controlvm prom-local savestate"
-  alias xrandr-work="xrandr --output DP1 --auto --above eDP1"
-  alias xrandr-work-off="xrandr --output DP1 --off"
-fi
+alias prom-local-start="VBoxManage startvm prom-local"
+alias prom-local-stop="VBoxManage controlvm prom-local savestate"
+alias xrandr-work="xrandr --output DP1 --auto --above eDP1"
+alias xrandr-work-off="xrandr --output DP1 --off"
 
 # History
 #########
