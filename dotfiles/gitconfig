@@ -3,7 +3,7 @@
   email = arne@kleinerdrei.net
 [core]
   excludesfile = ~/.gitignore
-  editor       = emacs
+  editor       = vim
 	pager = less -r
 [color]
   ui = true
