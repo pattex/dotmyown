@@ -26,7 +26,7 @@ export PATH
 # umask 022
 
 if [ $(uname) = "Linux" ]; then
-  export EDITOR=/usr/bin/emacs
+  export EDITOR=/usr/bin/vim
   export LC_TIME="de_DE.UTF-8"
 fi
 

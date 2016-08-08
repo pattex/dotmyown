@@ -21,7 +21,6 @@ autoload -Uz zmv
 # ALIASES
 ########################################################################
 
-alias e='emacs'
 alias vi='vim'
 alias bc='bc -l'
 alias cl="clear; l"
