@@ -4,8 +4,22 @@ set nocompatible
 " Enable syntax highlighting
 syntax on
 
-" Using a dark background within the editing area and syntax highlighting
-set background=dark
+" Colorscheme see https://github.com/hukl/Smyck-Color-Scheme
+color smyck
+
+" Add line numbers
+set number
+set ruler
+
+" Set encoding
+set encoding=utf-8
+
+" Whitespace stuff
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
 " Have Vim jump to the last position when reopening a file
 if has("autocmd")
@@ -26,7 +40,7 @@ set showmatch   " Show matching brackets.
 set smartcase   " Do smart case matching
 set autoindent
 set confirm
-set nofoldenable
+set nofoldenable " Disable code folding
 set foldmethod=syntax
 set history=1000
 set modeline
@@ -35,11 +49,21 @@ set sidescroll=1
 set sidescrolloff=3
 set wildmode=longest,list,full
 
-" Expand tabs to spaces
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+" Strip trailing whitespaces on each save
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Map Ctrl+l to clear highlighted searches
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" Highlight characters behind the 80 chars margin
+":au BufWinEnter * let w:m2=matchadd('ColumnMargin', '\%>80v.\+', -1)
+
 
 set title
 set titlelen=0
@@ -64,10 +88,19 @@ au FileType gitcommit set tw<
 au FileType html,eruby let b:closetag_html_style=1
 au Filetype html,eruby,xml,xsl ru macros/closetag.vim
 
+" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
+
 " Use Ruby completion
 if has("ruby")
   au FileType ruby,eruby ru autoload/rubycomplete.vim|set omnifunc=rubycomplete#Complete|let g:complType="\<C-X>\<C-O>"|let g:rubycomplete_buffer_loading=1|let g:rubycomplete_rails=1|let g:rubycomplete_classes_in_global=1
 endif
+
+" add json syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+" make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
 " Toggle completion mode
 imap <expr> <F9> ToggleFileCompl()
