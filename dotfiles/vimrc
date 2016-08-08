@@ -5,6 +5,7 @@ set nocompatible
 syntax on
 
 " Colorscheme see https://github.com/hukl/Smyck-Color-Scheme
+set term=xterm-256color
 color smyck
 
 " Add line numbers
