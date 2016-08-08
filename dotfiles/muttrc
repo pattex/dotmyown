@@ -1,0 +1,61 @@
+# Mutt behaviour
+set sort_aux = reverse-last-date-received
+set sidebar_width = 35
+set sidebar_sort = no
+#set maildir_trash = yes
+set editor=vim
+# set pager=vim
+set print_command="muttprint"
+unset mark_old # read/new is good enough for me
+set smart_wrap = yes
+set wait_key = no
+set delete = yes
+set include = yes
+set pager_index_lines = 10  # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop = yes       # don't go to next message automatically
+set menu_scroll = yes      # scroll in menus
+unset markers              # no ugly plus signs
+set help = no # No help line at the top
+
+bind index,pager \CK sidebar-prev
+bind index,pager \CJ sidebar-next
+bind index,pager \CO sidebar-open
+macro index S ':toggle sidebar_visible<enter>'
+macro pager S ':toggle sidebar_visible<enter>'
+
+bind pager <UP> previous-line
+bind pager <DOWN> next-line
+
+auto_view text/html
+alternative_order text/plain text/html
+
+# Adressbuch befragen (neu syncen mit pycardsyncer)
+set query_command="/usr/bin/pc_query -m '%s'"
+
+# Alias Setup (update per ~/bin/contact_sync.sh)
+set alias_file=~/.mutt/aliases
+set sort_alias=alias
+set reverse_alias=yes
+source $alias_file
+
+# GnuPG
+source ~/.mutt/gpg.rc
+set pgp_use_gpg_agent = yes
+set pgp_autosign = yes
+set pgp_autoencrypt = yes
+set pgp_replyencrypt = yes
+set pgp_good_sign="^gpgv?: Good signature from "
+
+# IMAP: offlineimap
+set folder = "~/Mail"
+source ~/.mutt/mailboxes
+
+source "~/.mutt/uni-koeln"
+folder-hook uni-koeln/ 'source ~/.mutt/uni-koeln'
+
+source "~/.mutt/bevuta"
+folder-hook bevuta/ 'source ~/.mutt/bevuta'
+
+source "~/.mutt/private"
+folder-hook kleinerdrei/ 'source ~/.mutt/private'
