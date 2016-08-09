@@ -13,3 +13,4 @@
 .autotest
 .local
 .rbenv-version
+*.swp
