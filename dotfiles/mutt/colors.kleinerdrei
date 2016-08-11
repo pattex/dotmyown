@@ -1,0 +1,68 @@
+# This color scheme aims to highlight as much useful information as
+# possible without spoiling user's visual experience by irritating
+# contrasts. Optimized for dark or transparent background.
+# --Dmitry Borodaenko <angdraug@mail.ru>
+
+# override defaults, make transparency work
+color normal    white default
+color attachment yellow default #
+color hdrdefault cyan default
+color indicator black cyan
+color markers   brightred default
+color quoted    green default
+color signature cyan default #
+color status    brightgreen blue
+color tilde     brightblue default #
+color tree      red default
+
+# paint different quote levels
+color	quoted brightblack default
+color	quoted1 blue default
+color	quoted2 green default
+color	quoted3 cyan default
+
+color body yellow default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email
+color body yellow default "(http|ftp)://[\-\.\,/+=&%~_:?\#a-zA-Z0-9]+" # URL
+color body brightwhite default "(^| )[*_]+[-&[:alnum:]]+[*_]( |$)" # bold/underline
+
+color header   brightgreen default ^From:
+color header   brightcyan default ^To:
+color header   brightcyan default ^Reply-To:
+color header   brightcyan default ^Cc:
+color header   brightblue default ^Subject:
+
+color   header  yellow  default "^Delivered-To: "
+color   header cyan default "^sender: "
+color   header cyan default "^organi[sz]ation: "
+color   header cyan default "x-editor: "
+color   header cyan default "(x-mailer|user-agent): "
+color   header cyan default "X-Operating-System: "
+color   header cyan default "X-MimeOLE: "
+color   header cyan default "X-Accept-Language: "
+color	header	red	default	"^message-id:"
+color	header	red	default	"^in-reply-to: "
+color	header	red	default	"^references: "
+color	header green default	"^followup-to: "
+color	header green default	"^mail-followup-to: "
+color	header green default	"^reply-to: "
+color	header	magenta	default	"MIME-Version: "
+color	header	magenta	default	"Content-Type: "
+color	header	magenta	default	"Content-Transfer-Encoding: "
+color	header	magenta	default	"Content-Disposition: "
+color	header	magenta	default	"Content-Encoding: "
+color	header	magenta	default	"Content-Language: "
+
+color status brightwhite blue
+
+color index blue default '~P' # from me
+color index cyan default '!~p' # not personal
+color index brightred default '~F' # flagged
+color index brightwhite default '~N' # new
+color index red default '~D' # deleted
+
+# spam
+color index magenta default "\(Resent-\)?Message-Id: <>"
+color index magenta default "\(Resent-\)?Message-Id: '<.* .*>'"
+color index magenta default "\(Resent-\)?Message-Id: localhost"
+color index magenta default "! \(Resent-\)?Message-Id: @"
+color index magenta default '~C Undisclosed.*Recipients'

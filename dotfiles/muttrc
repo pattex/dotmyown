@@ -18,6 +18,8 @@ set menu_scroll = yes      # scroll in menus
 unset markers              # no ugly plus signs
 set help = no # No help line at the top
 
+source /home/arne/.mutt/colors.kleinerdrei
+
 bind index,pager \CK sidebar-prev
 bind index,pager \CJ sidebar-next
 bind index,pager \CO sidebar-open
