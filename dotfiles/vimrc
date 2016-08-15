@@ -79,6 +79,18 @@ match RedundantSpaces /\s\+$\| \+\ze\t/
 " Define paste-toggle (needed when autoindent is on)
 set pastetoggle=<F12>
 
+" Spell checking
+set spelllang=de
+autocmd FileType mail setlocal spell " Use spell in mail
+autocmd BufRead,BufNewFile *.md setlocal spell " Use spell in markdown
+autocmd BufRead,BufNewFile *.tex setlocal spell " Use spell in TeX
+autocmd FileType gitcommit setlocal spell spelllang=en_us " Use spell in git commit messages
+
+" Use system clipboard
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+
 " Disable auto-comments
 au FileType * set comments=""
 
