@@ -66,3 +66,19 @@ color index magenta default "\(Resent-\)?Message-Id: '<.* .*>'"
 color index magenta default "\(Resent-\)?Message-Id: localhost"
 color index magenta default "! \(Resent-\)?Message-Id: @"
 color index magenta default '~C Undisclosed.*Recipients'
+
+# Diff syntax highlighting (Git/Subversion)
+color body white default ^[[:space:]].*
+color body brightyellow default ^(diff).*
+color body brightyellow default "^index [a-f0-9].*"
+color body brightgreen default ^[\+].*
+color body brightred default ^[\-].*
+color body brightyellow default "^-{3} .*"
+color body brightyellow default "^[\+]{3} .*"
+color body brightyellow default "^\=*"
+color body brightyellow default "^-\--*$"
+color body brightmagenta default [@@].*
+color body brightyellow default "^- Log ---.*"
+color body yellow default "^commit .*"
+color body yellow default "^New Revision: .*"
+color body brightwhite default "^Author: .*"
