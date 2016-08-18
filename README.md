@@ -5,9 +5,8 @@ Description
 -----------
 Have a guess.
 
-Installation and usage
-----------------------
-Clone the repo
+Installation
+------------
 
     git clone git://github.com/pattex/dotmyown.git ~/.dotmyown
     cd
@@ -17,4 +16,4 @@ That's it.
 
 Thanks to…
 ----------
-…everybody I have stolen from.
+…everybody I have stolen from. &lt;3
