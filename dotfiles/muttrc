@@ -2,9 +2,7 @@
 set sort_aux = reverse-last-date-received
 set sidebar_width = 35
 set sidebar_sort = no
-#set maildir_trash = yes
 set editor=vim
-# set pager=vim
 set print_command="muttprint"
 unset mark_old # read/new is good enough for me
 set smart_wrap = yes
@@ -17,6 +15,7 @@ set pager_stop = yes       # don't go to next message automatically
 set menu_scroll = yes      # scroll in menus
 unset markers              # no ugly plus signs
 set help = no # No help line at the top
+set quit=ask-yes
 
 source /home/arne/.mutt/colors.kleinerdrei
 
