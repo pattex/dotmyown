@@ -1,6 +1,7 @@
 [user]
   name = Arne Eilermann
   email = arne@kleinerdrei.net
+	signingkey = 85A8013B
 [core]
   excludesfile = ~/.gitignore
   editor       = vim
@@ -22,3 +23,5 @@
   untracked = cyan
 [push]
   default = current
+[commit]
+	gpgsign = true
