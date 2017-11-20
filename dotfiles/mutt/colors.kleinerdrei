@@ -59,6 +59,10 @@ color index cyan default '!~p' # not personal
 color index brightred default '~F' # flagged
 color index brightwhite default '~N' # new
 color index red default '~D' # deleted
+color index yellow default '~t chaospatinnen@lists.ccc.de' # All mails to chaospatinnen@lists.ccc.de
+color index yellow default '~c chaospatinnen@lists.ccc.de' # All mails to chaospatinnen@lists.ccc.de
+color index magenta default '~t chaosmentors@lists.ccc.de' # All mails to chaosmentors@lists.ccc.de
+color index magenta default '~c chaosmentors@lists.ccc.de' # All mails to chaosmentors@lists.ccc.de
 
 # spam
 color index magenta default "\(Resent-\)?Message-Id: <>"
