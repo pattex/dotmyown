@@ -28,6 +28,7 @@ export PATH
 if [ $(uname) = "Linux" ]; then
   export EDITOR=/usr/bin/vim
   export LC_TIME="de_DE.UTF-8"
+  export GPG_TTY=$(tty)
 fi
 
 export PAGER=less
